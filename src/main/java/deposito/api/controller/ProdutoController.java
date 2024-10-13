@@ -1,5 +1,6 @@
 package deposito.api.controller;
 
+import deposito.api.dto.produto.DadosAtualizacaoProduto;
 import deposito.api.dto.produto.DadosCadastroProduto;
 import deposito.api.dto.produto.DadosDetalhamentoProduto;
 import deposito.api.model.Produto;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,10 +47,23 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DadosDetalhamentoProduto>> listar() {
-        List<DadosDetalhamentoProduto> dadosDetalhamentoProdutoList = produtoRepository.findAll()
+    public ResponseEntity<List<DadosDetalhamentoProduto>> listar(Pageable pageable) {
+        List<DadosDetalhamentoProduto> dadosDetalhamentoProdutoList = produtoRepository.findAll(pageable)
                 .stream().map(DadosDetalhamentoProduto::new).toList();
         return ResponseEntity.ok(dadosDetalhamentoProdutoList);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoProduto> editar(
+            @RequestBody @Valid DadosAtualizacaoProduto dadosAtualizacaoProduto, HttpServletRequest request
+    ) {
+        var tokenJWT = tokenService.getToken(request);
+        var subject = tokenService.getSubject(tokenJWT);
+        var usuario = (Usuario) usuarioRepository.findByEmail(subject);
+        Produto produto = produtoRepository.getReferenceById(dadosAtualizacaoProduto.id());
+        produto.atualizar(dadosAtualizacaoProduto, usuario);
+        return ResponseEntity.ok(new DadosDetalhamentoProduto(produto));
     }
 
     @DeleteMapping("/{id}")

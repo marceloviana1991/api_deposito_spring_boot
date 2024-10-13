@@ -30,6 +30,7 @@ Para garantir a qualidade dos dados a aplicação deve oferecer:
 ## Projeto de Segurança de Dados
 
 Para garantir segurança contra acesso e/ou modificação não autorizados são implementadas medidas de:
+- Encapsulamento de entidades por meio de utilização de classes DTO;
 - Criptografia de senhas;
 - Políticas de privacidade;
 - Políticas de acesso.
@@ -51,3 +52,12 @@ A criação do sistema de pedidos será baseada no gerenciamento dos endpoits �
 ### 4. Criação do sistema de ouvidoria
 
 A criação do sistema de ouvidoria será feito por meio dos endpoints “/avaliacoes”. O sistema de gerenciamento de permissões dos endpoints “/avaliacoes” dá permissão para que os usuários comuns emitam avaliações dos produtos que fizeram pedido, mas somente os usuários administradores podem visualizar o resultado das avaliações. Além do sistema de gerenciamento de permissões, os endpoints de avaliações utilizam uma classe service que fica responsável pela implementação das regras de negócio.
+
+## Observações
+
+Por meio da  migration V2 a aplicação cria automaticamente um usuário do tipo ADMIN que possui:
+
+- **Login:** admin@deposito.com
+- **Senha:** senha123
+
+É sugerido que esse usuário seja utilizado somente para a criação do primeiro usuário pessoal do tipo ADMIN e logo após seja excluído.

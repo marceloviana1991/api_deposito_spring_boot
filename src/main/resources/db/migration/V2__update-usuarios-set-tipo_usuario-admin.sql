@@ -1,1 +1,0 @@
-update usuarios set tipo_usuario = "ADMIN" where id=1;

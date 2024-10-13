@@ -2,12 +2,14 @@ package deposito.api.controller;
 
 import deposito.api.dto.tokenJWT.DadosTokenJWT;
 import deposito.api.dto.usuario.*;
+import deposito.api.model.Produto;
 import deposito.api.model.Usuario;
 import deposito.api.repository.UsuarioRepository;
 import deposito.api.service.autenticacao.TokenService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,9 +51,9 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DadosDetalhamentoUsuario>> listar() {
+    public ResponseEntity<List<DadosDetalhamentoUsuario>> listar(Pageable pageable) {
         List<DadosDetalhamentoUsuario> dadosListagemUsuariosList = usuarioRepository
-                .findAll().stream().map(DadosDetalhamentoUsuario::new).toList();
+                .findAll(pageable).stream().map(DadosDetalhamentoUsuario::new).toList();
         return ResponseEntity.ok(dadosListagemUsuariosList);
     }
 
@@ -62,6 +64,14 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.getReferenceById(dadosAtualizacaoUsuario.id());
         usuario.atualizar(dadosAtualizacaoUsuario);
         return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> excluir(@PathVariable Long id) {
+        Usuario usuario = usuarioRepository.getReferenceById(id);
+        usuarioRepository.delete(usuario);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -10,7 +10,7 @@ public record DadosDetalhamentoProduto(
         double preco,
         String descricao,
         LocalDate data,
-        Long idEvento
+        Long idUsuario
 ) {
     public DadosDetalhamentoProduto(Produto produto) {
         this(
