@@ -4,7 +4,6 @@ import deposito.api.dto.pedido.DadosAtualizacaoItemPedido;
 import deposito.api.dto.pedido.DadosCadastroItemPedido;
 import jakarta.persistence.*;
 
-import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

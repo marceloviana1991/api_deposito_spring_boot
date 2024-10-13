@@ -77,7 +77,7 @@ A criação do sistema de pedidos será baseada no endpoits “/pedidos” imple
 
 Regras de validação:
 - Não é permitido cadastrar nenhum tipo de dado nulo ou em branco;
-- CEP deve conter 8 dígitos;
+- CEP deve conter 8 dígitos.
 
 Serviço de não-repúdio:
 - No serviço de cadastro de pedido foi implementado um serviço que captura do token o id do usuário que cadastrou o pedido;
@@ -91,6 +91,17 @@ Configuração de políticas de acesso e privacidade:
 ### 4. Criação do sistema de ouvidoria
 
 A criação do sistema de ouvidoria será feito por meio dos endpoints “/avaliacoes”. O sistema de gerenciamento de permissões dos endpoints “/avaliacoes” dá permissão para que os usuários comuns emitam avaliações dos produtos que fizeram pedido, mas somente os usuários administradores podem visualizar o resultado das avaliações. Além do sistema de gerenciamento de permissões, os endpoints de avaliações utilizam uma classe service que fica responsável pela implementação das regras de negócio.
+
+Regras de validação:
+- Não é permitido cadastrar nenhum tipo de dado nulo ou em branco;
+- nota deve ser maior ou igual a 0 e menor ou igual a 5;
+
+Serviço de não-repúdio:
+- No serviço de cadastro de pedido foi implementado um serviço que captura do token o id do usuário que cadastrou a avaliação.
+
+Configuração de políticas de acesso e privacidade:
+- Usuários autenticados com privilégios de USER ou ADMIN podem cadastrar avaliacoes;
+- Somente usuários autenticados com privilégios de ADMIN podem visualizar e deletar avaliacoes.
 
 ## Observações
 

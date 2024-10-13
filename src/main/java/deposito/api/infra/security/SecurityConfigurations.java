@@ -40,7 +40,9 @@ public class SecurityConfigurations {
                     req.requestMatchers(HttpMethod.POST, "/pedidos").hasRole("USER");
                     req.requestMatchers(HttpMethod.PUT, "/pedidos").hasRole("ADMIN");
                     req.requestMatchers(HttpMethod.DELETE, "/pedidos/{id}").hasRole("ADMIN");
-
+                    req.requestMatchers(HttpMethod.POST, "/avaliacoes").hasRole("USER");
+                    req.requestMatchers(HttpMethod.GET, "/avaliacoes").hasRole("ADMIN");
+                    req.requestMatchers(HttpMethod.DELETE, "/avaliacoes/{id}").hasRole("ADMIN");
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
