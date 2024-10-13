@@ -73,4 +73,10 @@ public class ProdutoController {
         produtoRepository.delete(produto);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoProduto> detalhar(@PathVariable Long id) {
+        Produto produto = produtoRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoProduto(produto));
+    }
 }

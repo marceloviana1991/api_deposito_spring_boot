@@ -2,7 +2,6 @@ package deposito.api.controller;
 
 import deposito.api.dto.tokenJWT.DadosTokenJWT;
 import deposito.api.dto.usuario.*;
-import deposito.api.model.Produto;
 import deposito.api.model.Usuario;
 import deposito.api.repository.UsuarioRepository;
 import deposito.api.service.autenticacao.TokenService;
@@ -72,6 +71,12 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.getReferenceById(id);
         usuarioRepository.delete(usuario);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoUsuario> detalhar (@PathVariable Long id) {
+        Usuario usuario = usuarioRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
     }
 
 }
