@@ -8,6 +8,7 @@ import deposito.api.repository.AvaliacaoRepository;
 import deposito.api.repository.ProdutoRepository;
 import deposito.api.repository.UsuarioRepository;
 import deposito.api.service.autenticacao.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
+@SecurityRequirement(name = "bearer-key")
 @RestController
 @RequestMapping("/avaliacoes")
 public class AvaliacaoController {

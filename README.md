@@ -103,6 +103,15 @@ Configuração de políticas de acesso e privacidade:
 - Usuários autenticados com privilégios de USER ou ADMIN podem cadastrar avaliacoes;
 - Somente usuários autenticados com privilégios de ADMIN podem visualizar e deletar avaliacoes.
 
+## Documentação
+
+Disponível no endpoint "/swagger-ui.html"
+
+![Documentação](imagens/documentacao.png)
+![Schemas 1](imagens/schemas1.png)
+![Schemas 2](imagens/schemas2.png)
+![Schemas 3](imagens/schemas3.png)
+
 ## Observações
 
 Por meio da  migration V2, a aplicação cria automaticamente um usuário do tipo ADMIN que possui:

@@ -8,6 +8,7 @@ import deposito.api.model.Usuario;
 import deposito.api.repository.ProdutoRepository;
 import deposito.api.repository.UsuarioRepository;
 import deposito.api.service.autenticacao.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/produtos")
+@SecurityRequirement(name = "bearer-key")
 public class ProdutoController {
 
     @Autowired

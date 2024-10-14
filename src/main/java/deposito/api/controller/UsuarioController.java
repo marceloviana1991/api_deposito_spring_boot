@@ -5,6 +5,7 @@ import deposito.api.dto.usuario.*;
 import deposito.api.model.Usuario;
 import deposito.api.repository.UsuarioRepository;
 import deposito.api.service.autenticacao.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class UsuarioController {
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 
+    @SecurityRequirement(name = "bearer-key")
     @GetMapping
     public ResponseEntity<List<DadosDetalhamentoUsuario>> listar(Pageable pageable) {
         List<DadosDetalhamentoUsuario> dadosListagemUsuariosList = usuarioRepository
@@ -56,6 +58,7 @@ public class UsuarioController {
         return ResponseEntity.ok(dadosListagemUsuariosList);
     }
 
+    @SecurityRequirement(name = "bearer-key")
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoUsuario> editar(
@@ -65,6 +68,7 @@ public class UsuarioController {
         return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
     }
 
+    @SecurityRequirement(name = "bearer-key")
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> excluir(@PathVariable Long id) {
@@ -73,6 +77,7 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
+    @SecurityRequirement(name = "bearer-key")
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoUsuario> detalhar (@PathVariable Long id) {
         Usuario usuario = usuarioRepository.getReferenceById(id);
